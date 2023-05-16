@@ -1,0 +1,15 @@
+h1 {
+    margin: 40px;
+    text-align: center;
+    font-size: 45px;
+  }
+
+  h2 {
+    text-align: center;
+    padding: 8px;
+    font-size: 35px;
+  }
+
+  form{
+    padding: 12px;
+  }
