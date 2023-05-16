@@ -19,20 +19,20 @@ debug = DebugToolbarExtension(app)
 
 @app.route("/")
 def root():
-    """Homepage: redirect to /playlists."""
+    """Homepage"""
     return redirect("/playlists")
 
 
 @app.route("/playlists")
 def show_all_playlists():
-    """Return a list of playlists."""
+    """List of playlists."""
     playlists = Playlist.query.all()
     return render_template("playlists.html", playlists=playlists)
 
 
 @app.route("/playlists/<int:playlist_id>")
 def show_playlist(playlist_id):
-    """Show detail on specific playlist."""
+    """Show playlist."""
     with app.app_context():
         playlist = Playlist.query.get_or_404(playlist_id)
         return render_template("playlist.html", playlist=playlist)
@@ -40,11 +40,7 @@ def show_playlist(playlist_id):
 
 @app.route("/playlists/add", methods=["GET", "POST"])
 def add_playlist():
-    """Handle add-playlist form:
-    
-    - if form not filled out or invalid: show form
-    - if valid: add playlist to SQLA and redirect to list-of-playlists
-    """
+    """Add-playlist form"""
     with app.app_context():
         form = PlaylistForm()
         if form.validate_on_submit():
@@ -57,14 +53,14 @@ def add_playlist():
 
 @app.route("/songs")
 def show_all_songs():
-    """Show list of songs."""
+    """List of songs."""
     songs = Song.query.all()
     return render_template("songs.html", songs=songs)
 
 
 @app.route("/songs/<int:song_id>")
 def show_song(song_id):
-    """Return a specific song."""
+    """Return a song."""
     with app.app_context():
         song = Song.query.get_or_404(song_id)
         return render_template("song.html", song=song)
@@ -72,11 +68,7 @@ def show_song(song_id):
 
 @app.route("/songs/add", methods=["GET", "POST"])
 def add_song():
-    """Handle add-song form:
-    
-    - if form not filled out or invalid: show form
-    - if valid: add song to SQLA and redirect to list-of-songs
-    """
+    """Add-song form:"""
     with app.app_context():
         form = SongForm()
         if form.validate_on_submit():
@@ -89,7 +81,7 @@ def add_song():
 
 @app.route("/playlists/<int:playlist_id>/add-song", methods=["GET", "POST"])
 def add_song_to_playlist(playlist_id):
-    """Add a song to a playlist and redirect to the playlist."""
+    """Add a song to a playlist & redirect to the playlist."""
     playlist = Playlist.query.get_or_404(playlist_id)
     form = NewSongForPlaylistForm()
     choices = [(song.id, song.title) for song in Song.query.all() if song not in playlist.songs]
