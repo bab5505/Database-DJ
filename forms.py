@@ -17,6 +17,7 @@ class SongForm(FlaskForm):
     artist = StringField('Artist', validators=[DataRequired()])
 
 
+    
 class NewSongForPlaylistForm(FlaskForm):
     """Adding a song to playlist."""
 
